@@ -12,7 +12,7 @@ SUB_TOPICS = {
     '/devices/wb-ms_11/controls/Illuminance': 'illuminance',
     '/devices/wb-msw-v3_21/controls/Temperature': 'temperature',
     '/devices/wb-msw-v3_21/controls/CO2': 'co2',
-    '/devices/wb-msw-v3_21/controls/Sound level': 'sound'
+    '/devices/wb-msw-v3_21/controls/Sound Level': 'sound'
 }
 
 # Создание словаря для хранения данных JSON
