@@ -20,8 +20,6 @@ SUB_TOPICS = {
 # Создание словаря для хранения данных JSON
 JSON_DICT = {}
 JSON_LIST = []
-for value in SUB_TOPICS.values():
-    JSON_DICT[value] = 0
 
 
 def on_connect(client, userdata, flags, rc):
@@ -58,14 +56,17 @@ def on_message(client: mqtt.Client, userdata, msg):
     print(topic + " " + payload)
 
     # Запись данных в файл
-    with open('data.json', 'w') as file:
+    with open('../data.json', 'w') as file:
         json_string = json.dumps({'data': JSON_LIST})  # Формирование строки JSON из словаря
         file.write(json_string)
-    with open('data.xml', 'w') as file:
+    with open('../data.xml', 'w') as file:
         unparsed = xmltodict.unparse({'data': JSON_LIST}, pretty=True)
         file.write(unparsed)
 
-def main():
+def main(subtopics=None):
+    SUB_TOPICS = SUB_TOPICS if None else subtopics
+    for value in SUB_TOPICS.values():
+        JSON_DICT[value] = 0
     # Создание и настройка экземпляра класса Client для подключения в Mosquitto
     client = mqtt.Client()
     client.on_connect = on_connect
