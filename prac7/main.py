@@ -1,5 +1,7 @@
 import paho.mqtt.client as mqtt
+import xmltodict
 import json
+from datetime import datetime
 
 
 # Параметры подключения к MQTT-брокеру
@@ -17,6 +19,7 @@ SUB_TOPICS = {
 
 # Создание словаря для хранения данных JSON
 JSON_DICT = {}
+JSON_LIST = []
 for value in SUB_TOPICS.values():
     JSON_DICT[value] = 0
 
@@ -50,13 +53,17 @@ def on_message(client: mqtt.Client, userdata, msg):
 
     param_name = SUB_TOPICS[topic]
     JSON_DICT[param_name] = payload
+    JSON_DICT['time'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    JSON_LIST.append(JSON_DICT)
     print(topic + " " + payload)
 
     # Запись данных в файл
     with open('data.json', 'w') as file:
-        json_string = json.dumps(JSON_DICT)  # Формирование строки JSON из словаря
+        json_string = json.dumps({'data': JSON_LIST})  # Формирование строки JSON из словаря
         file.write(json_string)
-
+    with open('data.xml', 'w') as file:
+        unparsed = xmltodict.unparse({'data': JSON_LIST}, pretty=True)
+        file.write(unparsed)
 
 def main():
     # Создание и настройка экземпляра класса Client для подключения в Mosquitto
