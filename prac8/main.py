@@ -12,8 +12,8 @@ KEEPALIVE = 60  # Время ожидания доставки сообщени�
 # Словарь с топиками и собираемыми из них параметрами
 SUB_TOPICS = {
     '/devices/wb-ms_11/controls/Illuminance': 'illuminance',
-    '/devices/wb-msw-v3_21/controls/CO2': 'co2',
-    '/devices/wb-msw-v3_21/controls/Sound Level': 'sound'
+    '/devices/wb-msw-v3_21/controls/CO2': 'CO2',
+    '/devices/power_status/controls/Vin': 'Vin'
 }
 
 # Создание словаря для хранения данных JSON
