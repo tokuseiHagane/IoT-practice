@@ -49,6 +49,6 @@ if __name__ == '__main__':
               '< 23.0 В.': len(([el for el in yVin if el < 23.0 ]))}
     
     lineplot(xAxis, yCO2, 'Время, c', "Показатели", "Изменения показателя датчика СО2\n(первые 100 зн. забракованы)")
-    histogram(yIlluminance, 50, 'Кол-во', 'Значения', 'Распределение показателей СО2')
+    histogram(yIlluminance, 50, 'Кол-во', 'Значения', 'Распределение показаний освещения')
     circular(groups.values(), groups.keys(), 'Кгруговая диаграмма Vin (~24В)')
 
