@@ -63,7 +63,7 @@ def on_message(client: mqtt.Client, userdata, msg):
         file.write(unparsed)
 
 def main(subtopics=None):
-    SUB_TOPICS = SUB_TOPICS if None else subtopics
+    SUB_TOPICS = SUB_TOPICS if subtopics is None else subtopics
     for value in SUB_TOPICS.values():
         JSON_DICT[value] = 0
     # Создание и настройка экземпляра класса Client для подключения в Mosquitto
